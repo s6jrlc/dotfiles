@@ -1,0 +1,90 @@
+"
+" sakura: ~/.vim/vimrc
+"
+
+if filereadable(expand('$VIMRUNTIME/defaults.vim'))
+	source $VIMRUNTIME/defaults.vim
+endif
+
+syntax on
+colorscheme elflord
+
+"let rc_path = fnamemodify($MYVIMRC, ':s?vimrc??')
+let rc_path = expand('<sfile>:p:h') . '/'
+for rc_file in split(expand(rc_path . '*.vim'), '\n')
+	exec 'source ' . rc_file
+endfor
+"if filereadable(expand(rc_path . 'hybridrc.vim'))
+"	exec 'source ' . rc_path . 'hybridrc.vim'
+"endif
+"if filereadable(expand(rc_path . 'new-window.vim'))
+"	exec 'source ' . rc_path . 'new-window.vim'
+"endif
+
+set number
+set nohlsearch
+set nobackup
+set autoindent
+set smartindent
+set nowrap
+"set expandtab
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
+set whichwrap=b,s,h,l,<,>,[,],~
+set backspace=indent,eol,start
+set encoding=utf-8
+set fileencoding=utf-8
+set fileencodings=utf-8
+set timeoutlen=500
+
+inoremap <C-e> <esc>
+vnoremap <C-e> <esc>
+
+nnoremap <C-n><C-d> :NW L .<CR>
+nnoremap <C-n><C-t> :botright term<CR>
+nnoremap <C-n>j :NW 
+nnoremap <C-n>k :NW t 
+nnoremap <C-n>h :NW l 
+nnoremap <C-n>l :NW r 
+
+inoremap <C-c><C-w> <esc>:w<CR>
+nnoremap <C-c><C-w> :w<CR>
+inoremap <C-c><C-w><C-b> <esc>:w<CR>:bd<CR>
+nnoremap <C-c><C-w><C-b> :w<CR>:bd<CR>
+inoremap <C-c><C-b> <esc>:bd<CR>
+nnoremap <C-c><C-b> :bd<CR>
+inoremap <C-c><C-w><C-e> <esc>:wq<CR>
+nnoremap <C-c><C-w><C-e> :wq<CR>
+inoremap <C-c><C-e><C-e> <esc>:q<CR>
+nnoremap <C-c><C-e><C-e> :q<CR>
+inoremap <C-c><C-e><C-a> <esc>:qa<CR>
+nnoremap <C-c><C-e><C-a> :qa<CR>
+
+nnoremap <C-c><C-c>u :e ++enc=utf-8<CR>
+nnoremap <C-c><C-c>s :e ++enc=sjis<CR>
+nnoremap <C-c><C-c>e :e ++enc=enc-jp<CR>
+
+inoremap <C-d>j <esc>Gi
+inoremap <C-d>k <esc>ggi
+inoremap <C-d>h <esc>0i
+inoremap <C-d>l <esc>$i<right>
+nnoremap <C-d>j G
+nnoremap <C-d>k gg
+nnoremap <C-d>h 0
+nnoremap <C-d>l $
+nnoremap J <C-d>
+nnoremap K <C-u>
+vnoremap <C-d>j G
+vnoremap <C-d>k gg
+vnoremap <C-d>h 0
+vnoremap <C-d>l $
+vnoremap J <C-d>
+vnoremap K <C-u>
+
+inoremap <C-l>2 ""<left> 
+inoremap <C-l>7 ''<left>
+inoremap <C-l>8 ()<left>
+noremap  <C-l>@ ``<left>
+inoremap <C-l>[ []<left>
+inoremap <C-l>{ {<CR><tab><BS><CR>}<esc>k$i<right>

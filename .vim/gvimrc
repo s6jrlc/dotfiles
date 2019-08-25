@@ -1,0 +1,6 @@
+"
+" sakura: ~/.vim/gvimrc
+"
+
+set columns=80
+set lines=24
