@@ -1,6 +1,6 @@
 #!/bin/sh
 
-DOTPATH="~/.dotfiles/"
+DOTPATH=$HOME"/.dotfiles"
 DOTREPO="https://github.com/s6jrlc/dotfiles/"
 
 exist() {
@@ -63,7 +63,7 @@ alias is_osx=is_macos
 alias is_macosx=is_macos
 
 if [ -d $DOTPATH ]; then
-	echo "$DOTPATH: already exists"
+	echo $DOTPATH": already exists"
 
 else
 	if has "git"; then
@@ -97,7 +97,7 @@ for f in .??*; do
 	[ $f = ".git" ] && continue
 	[ $f = ".gitignore" ] && continue
 
-	ln -snfv {$DOTPATH,"$HOME/"}$f
+	ln -snfv {$DOTPATH,$HOME}"/"$f
 done
 
 if is_bash; then
