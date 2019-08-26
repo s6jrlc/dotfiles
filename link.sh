@@ -1,6 +1,6 @@
 #!/bin/sh
 
-. $DOTPATH"etc/util.sh"
+sh $DOTPATH"etc/util.sh"
 
 cd $DOTPATH
 if [ $? -ne 0 ]; then
