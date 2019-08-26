@@ -1,5 +1,8 @@
 #!/bin/sh
 
+DOTPATH="~/.dotfiles/"
+DOTREPO="https://github.com/s6jrlc/dotfiles/"
+
 exist() {
 	which $1 > /dev/null 2>&1
 	return $?
@@ -59,11 +62,9 @@ is_macos() {
 alias is_osx=is_macos
 alias is_macosx=is_macos
 
-DOTPATH="~/.dotfiles/"
-DOTREPO="https://github.com/s6jrlc/dotfiles/"
-
 if [ -d $DOTPATH ]; then
 	echo "$DOTPATH: already exists"
+
 else
 	if has "git"; then
 		git clone --recursive $DOTREPO $DOTPATH
@@ -86,10 +87,6 @@ else
 	fi
 fi
 
-#. $DOTPATH"etc/util.sh"
-
-#. $DOTPATH"link.sh"
-
 cd $DOTPATH
 if [ $? -ne 0 ]; then
 	echo "-$(sh_name): $DOTPATH: No such file or directory" >&2
@@ -100,7 +97,7 @@ for f in .??*; do
 	[ $f = ".git" ] && continue
 	[ $f = ".gitignore" ] && continue
 
-	ln -snfv {$DOTPATH,"~/"}$f
+	ln -snfv {$DOTPATH,"$HOME/"}$f
 done
 
 if is_bash; then
