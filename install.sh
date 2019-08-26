@@ -3,7 +3,7 @@
 DOTPATH="~/.dotfiles/"
 DOTREPO="https://github.com/s6jrlc/dotfiles/"
 
-sh $DOTPATH"/etc/util.sh"
+. $DOTPATH"etc/util.sh"
 
 if has "git"; then
 	git clone --recursive $DOTREPO $DOTPATH
@@ -22,7 +22,7 @@ elif has "curl" || has "wget"; then
 	mv -f dotfiles-master $DOTPATH
 
 else
-	die "-$(sh_name): command not found: git, curl or wget required"
+	echo "-$(sh_name): command not found: git, curl or wget required" >&2
 fi
 sh $DOTPATH"/link.sh"
 

@@ -2,5 +2,5 @@
 
 installation:
 ``` installation
-$ curl -L raw.github.com/s6jrlc/dotfiles/master/install.sh | sh
+$ sh -c "$(curl -L raw.github.com/s6jrlc/dotfiles/master/install.sh)"
 ```
