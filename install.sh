@@ -111,6 +111,7 @@ if is_bash; then
 	)
 	for line in ${lines[@]}; do
 		if has_line $line $shrc; then
+			echo "add '"$line"' to "$shrc
 			echo $line >> $shrc
 		fi
 	done
