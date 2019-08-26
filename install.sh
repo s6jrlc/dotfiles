@@ -62,29 +62,46 @@ alias is_macosx=is_macos
 DOTPATH="~/.dotfiles/"
 DOTREPO="https://github.com/s6jrlc/dotfiles/"
 
-if has "git"; then
-	git clone --recursive $DOTREPO $DOTPATH
-
-elif has "curl" || has "wget"; then
-	TAR="archive/master.tar.gz"
-
-	if has "curl"; then
-		curl -L $DOTREPO$TAR
-
-	elif has "wget"; then
-		wget -O - $DOTREPO$TAR
-
-	fi | tar xzvf
-
-	mv -f dotfiles-master $DOTPATH
-
+if [ -d $DOTPATH ]; then
+	echo "$DOTPATH: already exists"
 else
-	echo "-$(sh_name): command not found: git, curl or wget required" >&2
+	if has "git"; then
+		git clone --recursive $DOTREPO $DOTPATH
+	
+	elif has "curl" || has "wget"; then
+		TAR="archive/master.tar.gz"
+	
+		if has "curl"; then
+			curl -L $DOTREPO$TAR
+	
+		elif has "wget"; then
+			wget -O - $DOTREPO$TAR
+	
+		fi | tar xzvf
+	
+		mv -f dotfiles-master $DOTPATH
+	
+	else
+		echo "-$(sh_name): command not found: git, curl or wget required" >&2
+	fi
 fi
 
 #. $DOTPATH"etc/util.sh"
 
-. $DOTPATH"link.sh"
+#. $DOTPATH"link.sh"
+
+cd $DOTPATH
+if [ $? -ne 0 ]; then
+	echo "-$(sh_name): $DOTPATH: No such file or directory" >&2
+	exit 1
+fi
+
+for f in .??*; do
+	[ $f = ".git" ] && continue
+	[ $f = ".gitignore" ] && continue
+
+	ln -snfv {$DOTPATH,"~/"}$f
+done
 
 if is_bash; then
 	cat <<- EOS >> ~/.bashrc
