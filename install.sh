@@ -12,10 +12,6 @@ has() {
 	exist $@
 }
 
-has_line() {
-	[ -n $(grep $1 $2) ]
-}
-
 lower() {
 	if [ $# -eq 0 ]; then
 		cat <&0
@@ -112,7 +108,7 @@ if is_bash; then
 		"export HISTCONTROL=ignoreboth"
 	)
 	for line in ${lines[@]}; do
-		if has_line $line $shrc; then
+		if [ -z "$(grep $line $shrc)" ]; then
 			echo "add '"$line"' to "$shrc
 			echo $line >> $shrc
 		fi
