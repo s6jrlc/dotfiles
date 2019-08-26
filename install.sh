@@ -23,9 +23,9 @@ else
 	echo "-$(sh_name): command not found: git, curl or wget required" >&2
 fi
 
-sh $DOTPATH"etc/util.sh"
+. $DOTPATH"etc/util.sh"
 
-sh $DOTPATH"/link.sh"
+. $DOTPATH"link.sh"
 
 if is_bash; then
 	cat <<- EOS >> ~/.bashrc
