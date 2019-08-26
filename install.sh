@@ -12,6 +12,11 @@ has() {
 	exist $@
 }
 
+has_line() {
+	grep $1 $2 > /dev/null 2>&1
+	return $?
+}
+
 lower() {
 	if [ $# -eq 0 ]; then
 		cat <&0
@@ -101,9 +106,18 @@ for f in .??*; do
 done
 
 if is_bash; then
-	cat <<- EOS >> ~/.bashrc
-	export HISTCONTROL=ignoreboth
-	EOS
+	shrc=$HOME"/.bashrc"
+	lines=(
+		"export HISTCONTROL=ignoreboth"
+	)
+	for line in ${lines[@]}; do
+		if has_line $line $shrc; then
+			echo $line >> $shrc
+		fi
+	done
+	#cat <<- EOS >> ~/.bashrc
+	#export HISTCONTROL=ignoreboth
+	#EOS
 elif is_zsh; then
 	cat <<- EOS >> ~/.zshrc
 	setopt histignorespace
