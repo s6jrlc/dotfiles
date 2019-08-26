@@ -13,8 +13,7 @@ has() {
 }
 
 has_line() {
-	grep $1 $2 > /dev/null 2>&1
-	return $?
+	[ -n $(grep $1 $2) ]
 }
 
 lower() {
