@@ -104,6 +104,8 @@ for f in .??*; do
 	ln -snfv {$DOTPATH,$HOME}"/"$f
 done
 
+IFS_BACKUP=$IFS
+IFS=$'\n'
 if is_bash; then
 	shrc=$HOME"/.bashrc"
 	lines=(
@@ -115,12 +117,17 @@ if is_bash; then
 			echo $line >> $shrc
 		fi
 	done
-	#cat <<- EOS >> ~/.bashrc
-	#export HISTCONTROL=ignoreboth
-	#EOS
 elif is_zsh; then
-	cat <<- EOS >> ~/.zshrc
-	setopt histignorespace
-	setopt histignorealldups
-	EOS
+	shrc=$HOME"/.zshrc"
+	lines=(
+		"setopt histignorespace"
+		"setopt histignorealldups"
+	)
+	for line in ${lines[@]}; do
+		if has_line $line $shrc; then
+			echo "add '"$line"' to "$shrc
+			echo $line >> $shrc
+		fi
+	done
 fi
+IFS=$IFS_BACKUP
