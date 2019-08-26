@@ -120,7 +120,7 @@ elif is_zsh; then
 		"setopt histignorealldups"
 	)
 	for line in ${lines[@]}; do
-		if has_line "$line" "$shrc"; then
+		if [ -z $(grep "$line" "$shrc") ]; then
 			echo "add '"$line"' to "$shrc
 			echo $line >> $shrc
 		fi
