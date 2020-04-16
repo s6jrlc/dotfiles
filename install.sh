@@ -103,6 +103,7 @@ done
 
 IFS_BACKUP=$IFS
 IFS=$'\n'
+echo ${SHELL##*/}
 if is_bash; then
 	shrc=$HOME"/.bashrc"
 	lines=(
