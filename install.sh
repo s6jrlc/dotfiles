@@ -33,14 +33,6 @@ is_zsh() {
 	[ ${SHELL##*/} = "zsh" ]
 }
 sh_name() {
-	#SH="sh"
-	#if is_bash; then
-	#	SH="bash"
-	#elif is_zsh; then
-	#	SH="zsh"
-	#fi
-
-	#echo $SH
 	echo ${SHELL##*/}
 }
 
@@ -103,14 +95,13 @@ done
 
 IFS_BACKUP=$IFS
 IFS=$'\n'
-echo ${SHELL##*/}
 if is_bash; then
 	shrc=$HOME"/.bashrc"
 	lines=(
 		"export HISTCONTROL=ignoreboth"
 	)
 	for line in ${lines[@]}; do
-		if [ -z $(grep "$line" "$shrc") ]; then
+		if [ -z $(grep "^""$line" "$shrc") ]; then
 			echo "add '"$line"' to "$shrc
 			echo $line >> $shrc
 		fi
@@ -122,12 +113,12 @@ elif is_zsh; then
 		"setopt histignorealldups"
 	)
 	for line in ${lines[@]}; do
-		if [ -z $(grep "$line" "$shrc") ]; then
+		if [ -z $(grep "^""$line" "$shrc") ]; then
 			echo "add '"$line"' to "$shrc
 			echo $line >> $shrc
 		fi
 	done
 else
-	echo "-$(sh_name): Not compatible yet" >&2
+	echo "-$(sh_name): Not compatible installation script yet" >&2
 fi
 IFS=$IFS_BACKUP
