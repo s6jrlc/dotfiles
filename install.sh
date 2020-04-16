@@ -27,10 +27,10 @@ lower() {
 }
 
 is_bash() {
-	[ -v BASH_VERSION ]
+	[ $0 = "-bash" ]
 }
 is_zsh() {
-	[ -v ZSH_VERSION ]
+	[ $0 = "-zsh" ]
 }
 sh_name() {
 	SH="sh"
