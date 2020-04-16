@@ -27,10 +27,12 @@ lower() {
 }
 
 is_bash() {
-	[ $0 = "-bash" ]
+	#[ $0 = "-bash" ]
+	echo `ps --pid $$ -o command | tail -1` | grep '^bash'
 }
 is_zsh() {
-	[ $0 = "-zsh" ]
+	#[ $0 = "-zsh" ]
+	echo `ps --pid $$ -o command | tail -1` | grep '^zsh'
 }
 sh_name() {
 	SH="sh"
