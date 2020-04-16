@@ -27,22 +27,21 @@ lower() {
 }
 
 is_bash() {
-	#[ $0 = "-bash" ]
-	echo `ps --pid $$ -o command | tail -1` | grep '^bash'
+	[ ${SHELL##*/} = "bash" ]
 }
 is_zsh() {
-	#[ $0 = "-zsh" ]
-	echo `ps --pid $$ -o command | tail -1` | grep '^zsh'
+	[ ${SHELL##*/} = "zsh" ]
 }
 sh_name() {
-	SH="sh"
-	if is_bash; then
-		SH="bash"
-	elif is_zsh; then
-		SH="zsh"
-	fi
+	#SH="sh"
+	#if is_bash; then
+	#	SH="bash"
+	#elif is_zsh; then
+	#	SH="zsh"
+	#fi
 
-	echo $SH
+	#echo $SH
+	echo ${SHELL##*/}
 }
 
 os_name() {
@@ -127,5 +126,7 @@ elif is_zsh; then
 			echo $line >> $shrc
 		fi
 	done
+else
+	echo "-$(sh_name): Not compatible yet" >&2
 fi
 IFS=$IFS_BACKUP
