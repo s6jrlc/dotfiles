@@ -101,22 +101,29 @@ if is_bash; then
 		"export HISTCONTROL=ignoreboth"
 	)
 	for line in ${lines[@]}; do
-		if [ -z $(grep "^""$line" "$shrc") ]; then
+		if [ -z $(grep "^$line" "$shrc") ]; then
 			echo "add '"$line"' to "$shrc
 			echo $line >> $shrc
 		fi
 	done
 elif is_zsh; then
 	shrc=$HOME"/.zshrc"
-	lines=(
-		"setopt histignorespace"
-		"setopt histignorealldups"
+	inserted_lines=(
+		'setopt histignorespace'
+		'setopt histignorealldups'
 	)
-	for line in ${lines[@]}; do
-		if [ -z $(grep "^""$line" "$shrc") ]; then
+	commented_line_regexs=(
+		'bindkey \\"\^H\\" backward-kill-word'
+	)
+	for line in ${inserted_lines[@]}; do
+		if [ -z $(grep "^$line" "$shrc") ]; then
 			echo "add '"$line"' to "$shrc
 			echo $line >> $shrc
 		fi
+	done
+	for line in ${commented_line_regexs[@]}; do
+		echo "comment out $line"
+#		sed -i -e "s/$line/#$line" $SHRC
 	done
 else
 	echo "-$(sh_name): Not compatible installation script yet" >&2
