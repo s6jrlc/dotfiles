@@ -56,6 +56,15 @@ is_macos() {
 alias is_osx=is_macos
 alias is_macosx=is_macos
 
+file_header() {
+	cat <<ー EOS
+	#
+	# $1
+	#
+	
+	EOS
+}
+
 if [ -d $DOTPATH ]; then
 	echo $DOTPATH": already exists"
 
@@ -106,6 +115,9 @@ IFS_BACKUP=$IFS
 IFS=$'\n'
 if is_bash; then
 	shrc=$HOME"/.bashrc"
+	if [ ! -f "SHOME/$shrc" ]; then
+		file_header $HOME/$shrc >> $HOME/$shrc
+	fi
 	lines=(
 		"export HISTCONTROL=ignoreboth"
 	)
@@ -117,6 +129,9 @@ if is_bash; then
 	done
 elif is_zsh; then
 	shrc=$HOME"/.zshrc"
+	if [ ! -f "SHOME/$shrc" ]; then
+		file_header $HOME/$shrc >> $HOME/$shrc
+	fi
 	inserted_lines=(
 		'setopt histignorespace'
 		'setopt histignorealldups'
@@ -132,7 +147,7 @@ elif is_zsh; then
 	done
 #	for line in ${commented_line_regexs[@]}; do
 #		echo "comment out '$line'"
-#		sed -i -e '/$line/ s/^#*/#/' $SHRC
+#		sed -i -e "/$line/ s/^#*/#/" $shrc
 #	done
 else
 	echo "-$(sh_name): Not compatible installation script yet" >&2
