@@ -123,7 +123,8 @@ elif is_zsh; then
 	done
 	for line in ${commented_line_regexs[@]}; do
 		echo 'comment out "'$line'"'
-		sed -i -e "s/$(echo "$line" | sed -e 's/[]\/$*.^[]/\\&/g')/#$line/" $SHRC
+		echo $line | sed -e 's/[]\/$*.^[]/\\&/g'
+		sed -i -e "s/"$(echo $line | sed -e 's/[]\/$*.^[]/\\&/g')"/#$line/" $SHRC
 	done
 else
 	echo "-$(sh_name): Not compatible installation script yet" >&2
