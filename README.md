@@ -10,7 +10,7 @@ $ sh -c "$(curl -L s6jr.com/dot)"
 ```
 
 #### TO-DO
-[ ] Prepare for installation on Windows PowerShell by the following command:
+- [ ] Prepare for installation on Windows PowerShell by the following command:
 ``` installation on Windows
 PS > iex ((new-object net.webclient).DownloadString('http://example.com/url'))
 ```
