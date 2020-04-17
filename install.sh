@@ -88,11 +88,11 @@ if [ $? -ne 0 ]; then
 fi
 
 if [ $(pfm_name) = "msys2" ]; then
-	echo '!!! caution !!!'
-	echo 'Msys2 / MinGW x86 / MinGW x64 need some operations to create SymLinks'
+	echo '!!!!! caution !!!!!'
+	echo 'Msys2 / MinGW x86 / MinGW x64 need some following operations to create SymLinks'
 	echo ' - Run the shell as Administrator'
-	echo ' - Uncomment "MSYS=winsymlink:nativestrict" in INI file dependent on PFM'
-	read -p "Press any key to continue this script: "
+	echo ' - Uncomment "MSYS=winsymlinks:nativestrict" in INI file dependent on PFM'
+	read -p 'Press any key to continue this script: '
 fi
 
 for f in .??*; do
