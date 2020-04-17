@@ -113,7 +113,7 @@ elif is_zsh; then
 		'setopt histignorealldups'
 	)
 	commented_line_regexs=(
-		"bindkey '^H' backward-kill-word"
+		'bindkey \\"\^H\\" backward-kill-word'
 	)
 	for line in ${inserted_lines[@]}; do
 		if [ -z $(grep "^$line" "$shrc") ]; then
@@ -122,9 +122,8 @@ elif is_zsh; then
 		fi
 	done
 	for line in ${commented_line_regexs[@]}; do
-		echo 'comment out "'$line'"'
-		echo $line | sed -e 's/[]\/$*.^[]/\\&/g'
-		sed -i -e "s/"$(echo $line | sed -e 's/[]\/$*.^[]/\\&/g')"/#$line/" $SHRC
+		echo "comment out '$line'"
+		sed -i -e "/$line/ s/^#*/#/" $SHRC
 	done
 else
 	echo "-$(sh_name): Not compatible installation script yet" >&2
