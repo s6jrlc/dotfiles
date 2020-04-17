@@ -36,21 +36,22 @@ sh_name() {
 	echo ${SHELL##*/}
 }
 
-os_name() {
+pfm_name() {
 	PLATFORM=""
 	case $(uname | lower) in
 		*'linux'*)	PLATFORM='linux'	;;
 		*'darwin'*)	PLATFORM='macos'	;;
+		*'m'*'_nt'*) PLATFORM='msys2'	;;
 		*)	PLATFORM='unknown'	;;
 	esac
 	echo $PLATFORM
 }
 
 is_linux() {
-	[ $(os_name) = "linux" ]
+	[ $(pfm_name) = "linux" ]
 }
 is_macos() {
-	[ $(os_name) = "macos" ]
+	[ $(pfm_name) = "macos" ]
 }
 alias is_osx=is_macos
 alias is_macosx=is_macos
@@ -84,6 +85,14 @@ cd $DOTPATH
 if [ $? -ne 0 ]; then
 	echo "-$(sh_name): $DOTPATH: No such file or directory" >&2
 	exit 1
+fi
+
+if [ $(pfm_name) = "msys2" ]; then
+	echo '!!! caution !!!'
+	echo 'Msys2 / MinGW x86 / MinGW x64 need some operations to create SymLinks'
+	echo ' - Run the shell as Administrator'
+	echo ' - Uncomment "MSYS=winsymlink:nativestrict" in INI file dependent on PFM'
+	read -p "Press any key to continue this script: "
 fi
 
 for f in .??*; do
