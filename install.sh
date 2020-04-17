@@ -122,8 +122,8 @@ elif is_zsh; then
 		fi
 	done
 	for line in ${commented_line_regexs[@]}; do
-		echo "comment out $line"
-#		sed -i -e "s/$line/#$line" $SHRC
+		echo "comment out '$line'"
+		sed -i -e "s/^$line/#$line" $SHRC
 	done
 else
 	echo "-$(sh_name): Not compatible installation script yet" >&2
