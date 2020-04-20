@@ -5,10 +5,10 @@ $repo_uri = New-Object System.Uri($prof_repo)
 $prof_file = Split-Path $repo_uri.AbsolutePath -Leaf
 $prof_path = Join-Path $env:USERPROFILE $file
 
-$cli = New-Object System.Net.WebClient
-$cli.DownloadFile($repo_uri, $prof_path)
-#Expand-Archive -Path $file_path -DestinationPath 
-
 echo $prof_repo
 echo $prof_file
 echo $prof_path
+
+$cli = New-Object System.Net.WebClient
+$cli.DownloadFile($repo_uri, $prof_path)
+#Expand-Archive -Path $file_path -DestinationPath 
