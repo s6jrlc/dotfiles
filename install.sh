@@ -57,7 +57,7 @@ alias is_osx=is_macos
 alias is_macosx=is_macos
 
 file_header() {
-	cat <<ー EOS
+	cat <<- EOS
 	#
 	# $1
 	#
