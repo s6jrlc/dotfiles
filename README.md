@@ -9,10 +9,9 @@ or
 $ sh -c "$(curl -L s6jr.com/dot)"
 ```
 
-#### TO-DO
-- [ ] Prepare for installation on Windows PowerShell by the following command:
+#### installation on Windows
 ``` installation on Windows
-PS > iex ((new-object net.webclient).DownloadString('http://example.com/url'))
+PS > iex ((new-object net.webclient).DownloadString('http://raw.github.com/s6jrlc/dotfiles/master/install.ps1'))
 ```
 or on Windows Cmd Prompt as Administrator:
 ``` installation on Windows Cmd Prompt

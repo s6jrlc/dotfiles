@@ -1,4 +1,6 @@
-#echo "Touch the script?"
+#
+# install.ps1
+#
 
 $prof_repo = "https://github.com/s6jrlc/dotfiles/archive/master.zip"
 $repo_uri = New-Object System.Uri($prof_repo)
