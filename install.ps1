@@ -10,5 +10,5 @@ $vim_prof_path = Join-Path $prof_path ".vim"
 $cli = New-Object System.Net.WebClient
 $cli.DownloadFile($repo_uri, $zip_path)
 Expand-Archive -Path $zip_path -DestinationPath $env:USERPROFILE -Force
-Move-Item (Join-Path $env:USERPROFILE "dotfiles-master") $prof_path -Force
+Rename-Item (Join-Path $env:USERPROFILE "dotfiles-master") -newName $prof_path -Force
 New-Item -Value $vim_prof_path -Path $env:USERPROFILE -Name "vimfiles" -ItemType SymbolicLink -Force
