@@ -57,11 +57,16 @@ alias is_osx=is_macos
 alias is_macosx=is_macos
 
 file_header() {
+	export_cargo_home=
+	if [ $(pfm_name) = "msys2" ]; then
+		export_cargo_home="export CARGO_HOME=~/.cargo"
+	fi
 	cat <<- EOS
 	#
 	# $1
 	#
 	
+	$export_cargo_home
 	EOS
 }
 
