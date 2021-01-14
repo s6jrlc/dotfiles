@@ -120,8 +120,8 @@ IFS_BACKUP=$IFS
 IFS=$'\n'
 if is_bash; then
 	shrc=$HOME"/.bashrc"
-	if [ ! -f "SHOME/$shrc" ]; then
-		file_header $HOME/$shrc >> $HOME/$shrc
+	if [ ! -f $shrc ]; then
+		file_header $shrc >> $shrc
 	fi
 	lines=(
 		"export HISTCONTROL=ignoreboth"
@@ -134,8 +134,8 @@ if is_bash; then
 	done
 elif is_zsh; then
 	shrc=$HOME"/.zshrc"
-	if [ ! -f "SHOME/$shrc" ]; then
-		file_header $HOME/$shrc >> $HOME/$shrc
+	if [ ! -f $shrc ]; then
+		file_header $shrc >> $shrc
 	fi
 	inserted_lines=(
 		'setopt histignorespace'
