@@ -120,8 +120,13 @@ IFS_BACKUP=$IFS
 IFS=$'\n'
 if is_bash; then
 	shrc=$HOME"/.bashrc"
+	profile=$HOME"/.bash_profile"
 	if [ ! -f $shrc ]; then
 		file_header $shrc >> $shrc
+	fi
+	if [ ! -f $profile ]; then
+		file_header $profile >> $profile
+		echo "[[ -f $shrc ]] && . shrc $" >> $profile
 	fi
 	lines=(
 		"export HISTCONTROL=ignoreboth"
@@ -134,8 +139,13 @@ if is_bash; then
 	done
 elif is_zsh; then
 	shrc=$HOME"/.zshrc"
+	profile=$HOME"/.zprofile"
 	if [ ! -f $shrc ]; then
 		file_header $shrc >> $shrc
+	fi
+	if [ ! -f $profile ]; then
+		file_header $profile >> $profile
+		echo "[[ -f $shrc ]] && . shrc $" >> $profile
 	fi
 	inserted_lines=(
 		'setopt histignorespace'
