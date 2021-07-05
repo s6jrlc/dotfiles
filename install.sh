@@ -126,7 +126,7 @@ if is_bash; then
 	fi
 	if [ ! -f $profile ]; then
 		file_header $profile >> $profile
-		echo "[[ -f $shrc ]] && . shrc $" >> $profile
+		echo "[[ -f $shrc ]] && . $shrc" >> $profile
 	fi
 	lines=(
 		"export HISTCONTROL=ignoreboth"
@@ -145,7 +145,7 @@ elif is_zsh; then
 	fi
 	if [ ! -f $profile ]; then
 		file_header $profile >> $profile
-		echo "[[ -f $shrc ]] && . shrc $" >> $profile
+		echo "[[ -f $shrc ]] && . $shrc" >> $profile
 	fi
 	inserted_lines=(
 		'setopt histignorespace'
