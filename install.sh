@@ -57,16 +57,15 @@ alias is_osx=is_macos
 alias is_macosx=is_macos
 
 file_header() {
-	export_cargo_home=
-	if [ $(pfm_name) = "msys2" ]; then
-		export_cargo_home="export CARGO_HOME=~/.cargo"
-	fi
-	cat <<- EOS
+#	export_cargo_home=
+#	if [ $(pfm_name) = "msys2" ]; then
+#		export_cargo_home="export CARGO_HOME=~/.cargo"
+#	fi
+	cat <<- 'EOS'
 	#
 	# $1
 	#
 	
-	$export_cargo_home
 	EOS
 }
 
@@ -119,8 +118,8 @@ done
 IFS_BACKUP=$IFS
 IFS=$'\n'
 if is_bash; then
-	shrc=$HOME"/.bashrc"
-	profile=$HOME"/.bash_profile"
+	shrc='~/.bashrc'
+	profile='~/.bash_profile'
 	if [ ! -f $shrc ]; then
 		file_header $shrc >> $shrc
 	fi
@@ -138,8 +137,8 @@ if is_bash; then
 		fi
 	done
 elif is_zsh; then
-	shrc=$HOME"/.zshrc"
-	profile=$HOME"/.zprofile"
+	shrc='~/.zshrc'
+	profile='~/.zprofile'
 	if [ ! -f $shrc ]; then
 		file_header $shrc >> $shrc
 	fi

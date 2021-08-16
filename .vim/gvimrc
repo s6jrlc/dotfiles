@@ -4,3 +4,11 @@
 
 set columns=80
 set lines=24
+
+"autocmd GUIEnter* set transparency=192
+"autocmd FocusGained* set transparency=192
+"autocmd FocusLost* set transparency=128
+
+autocmd GUIEnter* set transparency=75
+autocmd FocusGained* set transparency=75
+autocmd FocusLost* set transparency=50
