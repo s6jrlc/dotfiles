@@ -1,5 +1,5 @@
 "
-" sakura: ~/.vim/vimrc
+" ~/.vim/vimrc
 "
 
 if filereadable(expand('$VIMRUNTIME/defaults.vim'))
