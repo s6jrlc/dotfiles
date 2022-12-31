@@ -127,9 +127,7 @@ if is_bash; then
 		file_header $profile >> $profile
 		echo "[[ -f $shrc ]] && . $shrc" >> $profile
 	fi
-	lines=(
-		"export HISTCONTROL=ignoreboth"
-	)
+	lines=("export HISTCONTROL=ignoreboth")
 	for line in ${lines[@]}; do
 		if [ -z $(grep "^$line" "$shrc") ]; then
 			echo "add '"$line"' to "$shrc
