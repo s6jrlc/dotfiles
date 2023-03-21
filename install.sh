@@ -61,7 +61,7 @@ file_header() {
 #	if [ $(pfm_name) = "msys2" ]; then
 #		export_cargo_home="export CARGO_HOME=~/.cargo"
 #	fi
-	cat <<- 'EOS'
+	cat <<- EOS
 	#
 	# $1
 	#
@@ -118,8 +118,8 @@ done
 IFS_BACKUP=$IFS
 IFS=$'\n'
 if is_bash; then
-	shrc='~/.bashrc'
-	profile='~/.bash_profile'
+	shrc=~/.bashrc
+	profile=~/.bash_profile
 	if [ ! -f $shrc ]; then
 		file_header $shrc >> $shrc
 	fi
@@ -135,8 +135,8 @@ if is_bash; then
 		fi
 	done
 elif is_zsh; then
-	shrc='~/.zshrc'
-	profile='~/.zprofile'
+	shrc=~/.zshrc
+	profile=~/.zprofile
 	if [ ! -f $shrc ]; then
 		file_header $shrc >> $shrc
 	fi
