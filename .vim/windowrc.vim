@@ -1,5 +1,5 @@
 "
-" sakura: new-window.vim
+" .vim/windowrc.vim
 "
 
 function NewWindow(...)

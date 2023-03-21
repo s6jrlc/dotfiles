@@ -1,5 +1,5 @@
 "
-" sakura: hybridrc.vim
+" .vim/hybridrc.vim
 "
 "
 if filereadable(expand('<sfile>:p:h') . '/colors/hybrid.vim')
