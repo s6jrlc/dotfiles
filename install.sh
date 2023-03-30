@@ -123,11 +123,13 @@ if is_bash; then
 	if [ ! -f $shrc ]; then
 		file_header $shrc >> $shrc
 	fi
-	if [ ! -f $profile ]; then
+	if [ ! -f $profile -a ! is_macos ]; then
 		file_header $profile >> $profile
 		echo "[[ -f $shrc ]] && . $shrc" >> $profile
 	fi
-	lines=("export HISTCONTROL=ignoreboth")
+	lines=(\
+		"export HISTCONTROL=ignoreboth"\
+	)
 	for line in ${lines[@]}; do
 		if [ -z $(grep "^$line" "$shrc") ]; then
 			echo "add '"$line"' to "$shrc
@@ -140,13 +142,13 @@ elif is_zsh; then
 	if [ ! -f $shrc ]; then
 		file_header $shrc >> $shrc
 	fi
-	if [ ! -f $profile ]; then
+	if [ ! -f $profile -a ! is_macos ]; then
 		file_header $profile >> $profile
 		echo "[[ -f $shrc ]] && . $shrc" >> $profile
 	fi
-	inserted_lines=(
-		'setopt histignorespace'
-		'setopt histignorealldups'
+	inserted_lines=(\
+		'setopt histignorespace'\
+		'setopt histignorealldups'\
 	)
 #	commented_line_regexs=(
 #		'bindkey \\"\^H\\" backward-kill-word'
