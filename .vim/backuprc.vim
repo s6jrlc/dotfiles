@@ -18,7 +18,10 @@ endif
 if !isdirectory(s:cachedir)
 	call mkdir(s:cachedir, 'p')
 endif
-let &directory=s:cachedir
+
+"let &directory=s:cachedir
+exec 'set directory='.s:cachedir
+exec 'set viminfo+=n'.s:cachedir.'/viminfo'
 
 set nobackup
 set noundofile
